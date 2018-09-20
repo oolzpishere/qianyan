@@ -1,15 +1,20 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
+  # before_action :set_page, only: [:show, :edit, :update, :destroy]
 
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.all
+    # @pages = Page.all
   end
 
   # GET /pages/1
   # GET /pages/1.json
   def show
+    pages_arr = %w(registration)
+    view_file = ERB::Util.html_escape_once params[:path]
+    if pages_arr.include?(view_file)
+      render view_file and return if lookup_context.exists?(view_file, 'pages')
+    end
   end
 
   # GET /pages/new
