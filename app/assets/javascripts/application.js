@@ -16,5 +16,5 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-
-//= require_tree .
+//= require lib/Font-Awesome/svg-with-js/js/fontawesome.min
+//= require lib/Font-Awesome/svg-with-js/js/fa-solid.min
