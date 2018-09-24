@@ -9,7 +9,7 @@
     </div>
   </div>
   <hr class="px-1 border-0">
-  <div class="row">
+  <div class="row px-1">
     <% if @openid_results.count < 1 %>
       <div class="col-12 rounded my-3 p-3 shadow border-left border-info" style="border-left-width:5px !important;">
     	   您尚未提交报名信息，请在“前沿报名”进行提交。
@@ -20,7 +20,7 @@
 	    <% values = Entry.new(result: result).values %>
       <% index_names = %w(姓名 序号 确认码 提交时间) %>
       <% %w(广西区内报名 广西区外报名 作品评审费 光盘征订).each {|name| index_names << name if values[name].to_s.match(/\d/) } %>
-	    <div class="card col-12 px-0">
+	    <div class="card col-12 px-0 mb-3">
         <div class="card-header">
           <span class="h5"><%= result.form_name %></span>
         </div>
