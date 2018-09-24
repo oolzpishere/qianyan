@@ -1,0 +1,17 @@
+<%= form_with(model: dvd_request, local: true) do |form| %>
+  <% if dvd_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dvd_request.errors.count, "error") %> prohibited this dvd_request from being saved:</h2>
+
+      <ul>
+      <% dvd_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

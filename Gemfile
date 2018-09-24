@@ -70,3 +70,7 @@ gem 'pg'
 gem 'jquery-rails'
 
 gem 'bootstrap'
+
+# for parse xls
+gem "roo"
+gem "roo-xls"
