@@ -1,4 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+    <div class="col s12">
+	<div class="card">
+	    <div class="card-content">
+		<table class="striped">
+		    <thead>
+			<tr>
+			    <th class="card-title"><%=@dvd_result.form_name%></th>
+			</tr>
+		    </thead>
 
-<%= link_to 'Edit', edit_dvd_result_path(@dvd_result) %> |
-<%= link_to 'Back', dvd_results_path %>
+		    <tbody>
+			<%#  reject_rows(Entry.new(result: @result).values).each do |k, v| %>
+			<%  Entry.new(result: @dvd_result).values.each do |k, v| %>
+			    <%# unless v.to_s.chomp.empty? %>
+			    <tr>
+				<td><b><%= "#{k}:"%></b>
+					<%= compile_value(v) %>
+				</td>
+			    </tr>
+			    <%# end %>
+			<% end %>
+		    </tbody>
+		</table>
+
+	    </div>
+	</div>
+	<%= link_to '返回', { controller: "dvd_results",action: 'index', subject: @dvd_result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+    </div>
+</div>

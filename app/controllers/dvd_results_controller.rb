@@ -1,12 +1,14 @@
 class DvdResultsController < ApplicationController
   # before_action :set_dvd_result, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_pass, only: [:create]
+  before_action :set_dvd_result, only: [:show, :edit, :update, :destroy]
   before_action :subject_class, only: [:index, :show, :create]
   protect_from_forgery except: :create, if: Proc.new { |c| c.request.format == 'application/json' }
   # GET /dvd_results
   # GET /dvd_results.json
   def index
-    # @dvd_results = DvdResult.all
+    @dvd_results = subject_class.order(id: :desc).all
+    @openid_results = Rails.env.match(/production/) ? @dvd_results.select {|result| result.openid == session[:openid]} : @dvd_results
   end
 
   # GET /dvd_results/1
@@ -88,7 +90,7 @@ class DvdResultsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dvd_result
-      @dvd_result = DvdResult.find(params[:id])
+      @dvd_result = subject_class.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
