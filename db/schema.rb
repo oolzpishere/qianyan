@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_23_081026) do
+ActiveRecord::Schema.define(version: 2018_09_25_034201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chinese_dvds", force: :cascade do |t|
+    t.string "openid"
+    t.string "unionid"
+    t.string "form"
+    t.string "form_name"
+    t.json "entry"
+    t.string "gen_code"
+    t.string "data_type"
+    t.datetime "form_created_at"
+    t.datetime "form_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_type"], name: "index_chinese_dvds_on_data_type"
+    t.index ["form"], name: "index_chinese_dvds_on_form"
+    t.index ["gen_code"], name: "index_chinese_dvds_on_gen_code"
+    t.index ["openid"], name: "index_chinese_dvds_on_openid"
+    t.index ["unionid"], name: "index_chinese_dvds_on_unionid"
+  end
 
   create_table "english_dvds", force: :cascade do |t|
     t.string "openid"
@@ -32,6 +51,25 @@ ActiveRecord::Schema.define(version: 2018_09_23_081026) do
     t.index ["gen_code"], name: "index_english_dvds_on_gen_code"
     t.index ["openid"], name: "index_english_dvds_on_openid"
     t.index ["unionid"], name: "index_english_dvds_on_unionid"
+  end
+
+  create_table "math_dvds", force: :cascade do |t|
+    t.string "openid"
+    t.string "unionid"
+    t.string "form"
+    t.string "form_name"
+    t.json "entry"
+    t.string "gen_code"
+    t.string "data_type"
+    t.datetime "form_created_at"
+    t.datetime "form_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_type"], name: "index_math_dvds_on_data_type"
+    t.index ["form"], name: "index_math_dvds_on_form"
+    t.index ["gen_code"], name: "index_math_dvds_on_gen_code"
+    t.index ["openid"], name: "index_math_dvds_on_openid"
+    t.index ["unionid"], name: "index_math_dvds_on_unionid"
   end
 
 end
