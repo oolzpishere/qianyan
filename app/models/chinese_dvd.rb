@@ -1,0 +1,2 @@
+class ChineseDvd < ApplicationRecord
+end
