@@ -18,25 +18,6 @@ module Xls
       @form_name = form_names[1]
     end
 
-    def to_hash
-      result.map do |res|
-        entry = {}
-        res.each {|hash| entry.deep_merge! hash}
-        {"entry" => entry}.merge(important_value(entry))
-      end
-    end
-
-    def important_value(entry)
-      Hash[
-        "id" => entry["序号"].to_i,
-        "form" => form,
-        "form_name" => form_name,
-        "openid" => entry["微信OpenID"],
-        # "gen_code" => entry["确认码"].delete(" "),
-        "created_at" => entry["提交时间"],
-        "updated_at" => entry["修改时间"]
-      ]
-    end
 
     def load
       Roo::Spreadsheet.open(file)
@@ -46,67 +27,71 @@ module Xls
       load.sheet(0)
     end
 
-    # keys of level1
-    def row1
-      sheet.row(1)
-    end
+    def head
+      h = {}
+      row1 = sheet.row(1)
 
-    #loop until don't have nil in row1
-    def row1_dup_nil(row)
-      if (row.any? {|item| item.nil?})
-        row  =  dup_nil(row)
-        row1_dup_nil(row)
-      else
-        row
+      row1.each_with_index do |item, i|
+        next if item.nil?
+        h[item] = nil
+
+        if row1[i + 1].nil? && ((i + 1) < row1.length)
+          cc = children_count(row1, i)
+          # h[item] = []
+          h[item] = {}
+          cc.times do |j|
+            nest_key = get_cell(sheet, 2, i + j + 1)
+            # _h = {}
+            # _h["name"] = nest_key
+            # _h["number"] = nil
+            # h[item] << _h
+            h[item][nest_key] = nil
+          end
+        end
       end
+      h
     end
 
-    # some child of level1
-    def row2
-      sheet.row(2)
-    end
-
-    def row2_values
+    def values
       arr = []
-      3.upto(sheet.last_row) do |i|
-        row_value = sheet.row(i)
-        arr << match_value(row2, row_value)
+      3.upto(sheet.last_row) do |num|
+        row = sheet.row(num)
+        _head = head.dup
+        _i = 0
+
+        _head.each do |k,_|
+          if _head[k].is_a?(Hash)
+            _head[k].each do |nk, nv|
+              _head[k][nk] = row[_i]
+              _i += 1
+            end
+          else
+            _head[k] = row[_i]
+            _i += 1
+          end
+        end
+        arr << _head
       end
       arr
     end
-
-    #row 1 merge all
-    def result
-      row2_values.map { |rv|
-        match_value(row1_dup_nil(row1), rv) }
-    end
-
-    # def mto_json
-    #   to_hash.map { |row| row.to_json }
-    # end
 
     private
 
-    def dup_nil(row)
-      row.each_with_index.map do |item, index|
-        if index < (row.count) - 1 # not last item
-          item || item = row[index - 1]
-        else
-          item
-        end
+    def children_count(row, i)
+      j = i
+      count = 0
+      while (row[j + 1].nil?) do
+        j += 1
+        count += 1
       end
+      # for last one
+      count += 1
     end
 
-    def match_value(keys_array, values_array)
-      arr = []
-      keys_array.each_with_index do |item, index|
-        # "values_array[index].to_s" change nil to empty string
-        value = values_array[index] || values_array[index].to_s
-        c = item ? { item => value } : value
-        arr << c
-      end
-      arr
+    def get_cell(sheet, row, column)
+      sheet.cell(row, column)
     end
+
 
   end
 end
