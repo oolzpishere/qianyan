@@ -18,7 +18,6 @@ module Xls
       @form_name = form_names[1]
     end
 
-
     def load
       Roo::Spreadsheet.open(file)
     end
@@ -73,6 +72,25 @@ module Xls
         arr << _head
       end
       arr
+    end
+
+    def values_handle
+      values.map do |v|
+        {"entry" => v}.merge(important_value(v))
+      end
+    end
+
+    def important_value(entry)
+      Hash[
+        "id" => entry["序号"].to_i,
+        "form" => form,
+        "form_name" => form_name,
+        "openid" => entry["微信OpenID"],
+        # "gen_code" => entry["确认码"].delete(" "),
+        "created_at" => entry["提交时间"],
+        "updated_at" => entry["修改时间"],
+        "data_type" => "xls"
+      ]
     end
 
     private

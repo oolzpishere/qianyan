@@ -95,7 +95,7 @@ class DvdResultsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dvd_result_params
-      params.fetch(:dvd_result, {}).permit(:id, :form, :form_name, :openid, :created_at, :updated_at,:entry => {})
+      params.fetch(:dvd_result, {}).permit(:id, :form, :form_name, :openid, :created_at, :updated_at, :data_type, :entry => {})
     end
 
     def authenticate_pass
