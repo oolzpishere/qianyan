@@ -1,12 +1,19 @@
 class RedirectsController < ApplicationController
   # before_action :set_redirect, only: [:show, :edit, :update, :destroy]
-  
+
   # GET /redirects
   # GET /redirects.json
   def index
     # @redirects = Redirect.all
-    wall_url = 'https://www.hixianchang.com/pro/mobile/index.html?/#/common/transfer-route.html?mobileFlag=njNTRHN9&route=wall-msg'
-    redirect_to wall_url
+    path = params[:path]
+    case path
+    when path == "junior"
+      
+    when path == "senior"
+
+    else
+      redirect_to 'https://www.hixianchang.com/pro/mobile/index.html?/#/common/transfer-route.html?mobileFlag=njNTRHN9&route=wall-msg'
+    end
   end
 
   # GET /redirects/1
@@ -72,6 +79,6 @@ class RedirectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def redirect_params
-      params.fetch(:redirect, {})
+      params.fetch(:redirect, {}).permit(:path)
     end
 end
