@@ -7,14 +7,14 @@ class RedirectsController < ApplicationController
     # @redirects = Redirect.all
     path = params[:path]
     case path
-    when path == "xiaoshu"
-      # qianyan.sflx.com.cn?path=xiaoshu
+    when "xiaoshu"
+      # https://qianyan.sflx.com.cn/redirects?path=xiaoshu
       redirect_to 'https://www.hixianchang.com/pro/mobile/index.html?/#/common/transfer-route.html?mobileFlag=njNTRHN9&route=wall-msg'
-    when path == "xiaoying"
+    when "xiaoying"
 
-    when path == "chuying"
+    when "chuying"
 
-    when path == "gaoying"
+    when "gaoying"
 
     else
 
