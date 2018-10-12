@@ -18,7 +18,7 @@ class DvdResultsController < ApplicationController
       s_order = Rails.env.match(/production/) ? @dvd_results.select {|result| result.openid == session[:openid]} : @dvd_results
       @openid_results  << s_order
     else
-      subject_names = %w(ChineseDvd EnglishDvd MathDvd)
+      subject_names = %w(MathDvd EnglishDvd ChineseDvd)
       subject_names.each do |name|
         orders = name.camelize.constantize.order(id: :desc).all
         s_order = Rails.env.match(/production/) ? orders.select {|o| o.openid == session[:openid]} : orders
