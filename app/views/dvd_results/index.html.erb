@@ -23,13 +23,13 @@
         <% %w(广西区内报名 广西区外报名 作品评审费 光盘征订).each {|name| index_names << name if values[name].to_s.match(/\d/) } %>
   	    <div class="card col-12 px-0 mb-3">
           <div class="card-header">
-            <span class="h5"><%= result.form_name %></span>
+            <span class="h6"><%= result.form_name %></span>
           </div>
           <div class="card-body">
             <!-- <div class="card-title h5"><%= result.form_name %></div> -->
         		<div class="card-text">
               <% index_names.each do |name| %>
-                <p>
+                <p class="mb-1">
       				    <%= tag.b("#{name}:") %>
                   <%= compile_value(values[name])%>
                 </p>
