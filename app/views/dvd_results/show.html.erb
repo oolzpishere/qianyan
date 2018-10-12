@@ -4,13 +4,13 @@
     </div>
   	<div class="card col-12 px-0">
       <div class="card-header">
-        <span class="h5"><%= @dvd_result.form_name %></span>
+        <span class="h6"><%= @dvd_result.form_name %></span>
       </div>
       <div class="card-body">
   	    <div class="card-text">
   			<%#  reject_rows(Entry.new(result: @result).values).each do |k, v| %>
   			<%  Entry.new(result: @dvd_result).values.each do |k, v| %>
-  				<p>
+  				<p class="mb-1">
             <b><%= "#{k}:"%></b>
   					<%= compile_value(v) %>
   				</p>
