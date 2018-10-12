@@ -15,7 +15,8 @@
   					<%= compile_value(v) %>
   				</p>
   			<% end %>
-  	     <%= link_to '返回', { controller: "dvd_results",action: 'index', subject: @dvd_result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+        <%= link_to '返回', :back, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+  	     <%# link_to '返回', { controller: "dvd_results",action: 'index', subject: @dvd_result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
   	    </div>
       </div>
   	</div>
