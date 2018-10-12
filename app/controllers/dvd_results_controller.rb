@@ -12,8 +12,20 @@ class DvdResultsController < ApplicationController
   # GET /dvd_results
   # GET /dvd_results.json
   def index
-    @dvd_results = subject_class.order(id: :desc).all
-    @openid_results = Rails.env.match(/production/) ? @dvd_results.select {|result| result.openid == session[:openid]} : @dvd_results
+    @openid_results = []
+    if subject_class
+      @dvd_results = subject_class.order(id: :desc).all
+      s_order = Rails.env.match(/production/) ? @dvd_results.select {|result| result.openid == session[:openid]} : @dvd_results
+      @openid_results  << s_order
+    else
+      subject_names = %w(ChineseDvd EnglishDvd MathDvd)
+      subject_names.each do |name|
+        orders = name.camelize.constantize.order(id: :desc).all
+        s_order = Rails.env.match(/production/) ? orders.select {|o| o.openid == session[:openid]} : orders
+        @openid_results << s_order if !s_order.empty?
+      end
+    end
+
   end
 
   # GET /dvd_results/1

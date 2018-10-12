@@ -16,30 +16,32 @@
        </div>
     <% end %>
 
-  	<% @openid_results.each do |result| %>
-	    <% values = Entry.new(result: result).values %>
-      <% index_names = %w(姓名 序号 确认码 提交时间) %>
-      <% %w(广西区内报名 广西区外报名 作品评审费 光盘征订).each {|name| index_names << name if values[name].to_s.match(/\d/) } %>
-	    <div class="card col-12 px-0 mb-3">
-        <div class="card-header">
-          <span class="h5"><%= result.form_name %></span>
-        </div>
-        <div class="card-body">
-          <!-- <div class="card-title h5"><%= result.form_name %></div> -->
-      		<div class="card-text">
-            <% index_names.each do |name| %>
-              <p>
-    				    <%= tag.b("#{name}:") %>
-                <%= compile_value(values[name])%>
-              </p>
-            <% end %>
+    <% @openid_results.each do |record| %>
+    	<% record.each do |result| %>
+  	    <% values = Entry.new(result: result).values %>
+        <% index_names = %w(姓名 序号 确认码 提交时间) %>
+        <% %w(广西区内报名 广西区外报名 作品评审费 光盘征订).each {|name| index_names << name if values[name].to_s.match(/\d/) } %>
+  	    <div class="card col-12 px-0 mb-3">
+          <div class="card-header">
+            <span class="h5"><%= result.form_name %></span>
+          </div>
+          <div class="card-body">
+            <!-- <div class="card-title h5"><%= result.form_name %></div> -->
+        		<div class="card-text">
+              <% index_names.each do |name| %>
+                <p>
+      				    <%= tag.b("#{name}:") %>
+                  <%= compile_value(values[name])%>
+                </p>
+              <% end %>
 
-      			<%= link_to '查看详情',{ controller: "dvd_results",action: 'show', id: result,  subject: result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
-      		</div>
-        </div>
-	    </div>
+        			<%= link_to '查看详情',{ controller: "dvd_results",action: 'show', id: result,  subject: result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+        		</div>
+          </div>
+  	    </div>
 
-  	<% end %>
+    	<% end %>
+    <% end %>
   	<%# link_to '返回',  root_path, class: "waves-effect waves-light btn blue darken-1 white-text" %>
   </div>
 </div>
