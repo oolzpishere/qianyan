@@ -123,7 +123,6 @@ class DvdResultsController < ApplicationController
     end
 
     def subject_class
-      # subjects = %w(PrimaryChineseResult PrimaryEnglishCompetitionResult PrimaryEnglishResult PrimaryMathResult)
       subject = params[:subject] && params[:subject].camelize
       if subject_names.include?(subject)
         subject.constantize
