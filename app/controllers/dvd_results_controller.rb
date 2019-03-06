@@ -19,7 +19,7 @@ class DvdResultsController < ApplicationController
       @openid_results  << s_order
     else
       # show all, if not given subject_class
-      if params[:period] == 2018
+      if params[:period].match(/2018/)
         subject_names = %w(MathDvd EnglishDvd ChineseDvd)
       else
         subject_names = %w(MathADvd EnglishADvd ChineseADvd)
