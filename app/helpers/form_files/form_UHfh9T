@@ -10,6 +10,21 @@
                 <td>total_price</td>
               </tr>
               <tr class=" ">
+                <td>交易号</td>
+                <td>String</td>
+                <td>trade_no</td>
+              </tr>
+              <tr class=" ">
+                <td>交易状态</td>
+                <td>String</td>
+                <td>trade_status</td>
+              </tr>
+              <tr class=" ">
+                <td>支付渠道</td>
+                <td>String</td>
+                <td>payment_method</td>
+              </tr>
+              <tr class=" ">
                 <td>发票号</td>
                 <td>String</td>
                 <td>field_45</td>
@@ -63,6 +78,41 @@
                 <td>备注</td>
                 <td>String</td>
                 <td>field_24</td>
+              </tr>
+              <tr class=" ">
+                <td>确认码</td>
+                <td>String</td>
+                <td>gen_code</td>
+              </tr>
+              <tr class=" ">
+                <td>微信昵称</td>
+                <td>String</td>
+                <td>x_field_weixin_nickname</td>
+              </tr>
+              <tr class=" ">
+                <td>微信性别</td>
+                <td>String</td>
+                <td>x_field_weixin_gender</td>
+              </tr>
+              <tr class=" ">
+                <td>微信国家</td>
+                <td>String</td>
+                <td>x_field_weixin_country</td>
+              </tr>
+              <tr class=" ">
+                <td>微信省市</td>
+                <td>Hash</td>
+                <td>x_field_weixin_province_city</td>
+              </tr>
+              <tr class=" ">
+                <td>微信OpenID</td>
+                <td>String</td>
+                <td>x_field_weixin_openid</td>
+              </tr>
+              <tr class=" ">
+                <td>微信头像</td>
+                <td>String</td>
+                <td>x_field_weixin_headimgurl</td>
               </tr>
               <tr class=" ">
                 <td>提交人</td>
