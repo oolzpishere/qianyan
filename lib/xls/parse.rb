@@ -1,4 +1,7 @@
 # coding: utf-8
+#############################
+## decide to abandon, backup plan is use Jinshuju's official search.
+#############################
 require 'roo'
 require 'roo-xls'
 

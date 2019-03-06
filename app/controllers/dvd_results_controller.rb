@@ -18,6 +18,7 @@ class DvdResultsController < ApplicationController
       s_order = Rails.env.match(/production/) ? @dvd_results.select {|result| result.openid == session[:openid]} : @dvd_results
       @openid_results  << s_order
     else
+      # show all, if not given subject_class
       subject_names = %w(MathDvd EnglishDvd ChineseDvd)
       subject_names.each do |name|
         orders = name.camelize.constantize.order(id: :desc).all
@@ -124,9 +125,13 @@ class DvdResultsController < ApplicationController
 
     def subject_class
       subject = params[:subject] && params[:subject].camelize
-      if subject_names.include?(subject)
+      if subject_class_exist?(subject)
         subject.constantize
       end
+    end
+
+    def subject_class_exist?(subject)
+      subject_names.include?(subject)
     end
 
     def subject_names
