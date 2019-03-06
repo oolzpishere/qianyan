@@ -19,7 +19,12 @@ class DvdResultsController < ApplicationController
       @openid_results  << s_order
     else
       # show all, if not given subject_class
-      subject_names = %w(MathDvd EnglishDvd ChineseDvd)
+      if params[:period] == 2018
+        subject_names = %w(MathDvd EnglishDvd ChineseDvd)
+      else
+        subject_names = %w(MathDvd2019 EnglishDvd2019 ChineseDvd2019)
+      end
+
       subject_names.each do |name|
         orders = name.camelize.constantize.order(id: :desc).all
         s_order = Rails.env.match(/production/) ? orders.select {|o| o.openid == session[:openid]} : orders
