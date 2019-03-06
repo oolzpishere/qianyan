@@ -13,7 +13,7 @@ class Entry
     form_name = result[:form_name]
     # key_type = eng_key? ? "eng" : "chinese"
     @xml_factory = XmlFactory.new(form: form)
-    @form_structure = xmlFactory.form_structure
+    @form_structure = xml_factory.form_structure
   end
 
   def show_values
@@ -35,7 +35,7 @@ class Entry
   def except_hash(values)
     # values =  values.except( '发票号', '邮寄状态','提交人', '微信头像', '微信OpenID', '微信昵称', '微信性别', '微信国家', '微信省市', '修改时间', 'IP' )
     reject_array = ['发票号', '邮寄状态','提交人', '微信头像', '微信OpenID', '微信昵称', '微信性别', '微信国家', '微信省市', '修改时间', 'IP']
-    values.reject{|k,_| reject_array.includ?( form_structure[k]["label"] ) }
+    values.reject{|k,_| reject_array.include?( form_structure[k]["label"] ) }
   end
 
   # reject empty products
