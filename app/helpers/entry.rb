@@ -1,7 +1,7 @@
 # coding: utf-8
 class Entry
 
-  attr_reader :result, :entry, :form, :form_name, :form_structure
+  attr_reader :result, :entry, :form, :form_name, :form_structure, :xml_factory
 
   # hd=hash_data
   # [params] Result.any
@@ -12,7 +12,7 @@ class Entry
     form = result[:form]
     form_name = result[:form_name]
     # key_type = eng_key? ? "eng" : "chinese"
-    xmlFactory = XmlFactory.new(form: form)
+    @xml_factory = XmlFactory.new(form: form)
     @form_structure = xmlFactory.form_structure
   end
 
@@ -49,7 +49,7 @@ class Entry
   # english key use keys or chinese key use values from name_pair
   def filter_entry
     entry.select do |k, _|
-      xmlFactory.form_keys.include?(k)
+      xml_factory.form_keys.include?(k)
     end
   end
 
