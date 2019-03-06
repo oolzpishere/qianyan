@@ -1,7 +1,7 @@
 # coding: utf-8
 class Entry
 
-  attr_reader :result, :entry, :form, :form_name, :form_structure_array
+  attr_reader :result, :entry, :form, :form_name, :form_structure
 
   # hd=hash_data
   # [params] Result.any
@@ -13,7 +13,16 @@ class Entry
     form_name = result[:form_name]
     # key_type = eng_key? ? "eng" : "chinese"
     xmlFactory = XmlFactory.new(form: form)
-    @form_structure_array = xmlFactory.form_structure_array
+    @form_structure = xmlFactory.form_structure
+  end
+
+  def show_values
+    name_values = {}
+    values.each do |k,v|
+      label = form_structure[k] && form_structure[k]["label"]
+      name_values[label] = v
+    end
+    name_values
   end
 
   def values
@@ -26,7 +35,7 @@ class Entry
   def except_hash(values)
     # values =  values.except( '发票号', '邮寄状态','提交人', '微信头像', '微信OpenID', '微信昵称', '微信性别', '微信国家', '微信省市', '修改时间', 'IP' )
     reject_array = ['发票号', '邮寄状态','提交人', '微信头像', '微信OpenID', '微信昵称', '微信性别', '微信国家', '微信省市', '修改时间', 'IP']
-    values.reject{|k,_| reject_array.includ?( form_structure_array[k]["label"] ) }
+    values.reject{|k,_| reject_array.includ?( form_structure[k]["label"] ) }
   end
 
   # reject empty products

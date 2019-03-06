@@ -9,24 +9,23 @@ class XmlFactory
 
   # getting: ["serial_number", "total_price", "trade_no", "trade_status", "payment_method", "field_45", "field_48".....]
   def form_keys
-    form_structure_array.map { |hash| hash.keys.first }
+    form_structure.keys
   end
 
-  # finally getting [{"serial_number"=>{"label"=>"序号", "data_type"=>"Float"}}, {"total_price"=>{"label"=>"应付金额", "data_type"=>"Float"}}, {"trade_no"=>{"label"=>"交易号", "data_type"=>"String"}}, {"trade_status"=>{"label"=>"交易状态", "data_type"=>"String"}}, {"payment_method"=>{"label"=>"支付渠道", "data_type"=>"String"}}, {"field_45"=>{"label"=>"发票号", "data_type"=>"String"}}......]
-  def form_structure_array(data = xml_data)
+  # finally getting {"serial_number"=>{"label"=>"序号", "data_type"=>"Float"}, "total_price"=>{"label"=>"应付金额", "data_type"=>"Float"}......}
+  def form_structure(data = xml_data)
     xml_hash = hash_from_xml(data)
     td_array = get_td_array(xml_hash)
-
+    h = Hash.new
     # ["序号", "Float", "serial_number"]
-    td_array.map do |arr|
-      h = Hash.new
+    td_array.each do |arr|
       api_code = arr[2]
       h[api_code] = {
         "label" => arr[0],
         "data_type" => arr[1]
       }
-      h
     end
+    h
     # delete change the source
     # ["序号", "Float", "serial_number"] > ["序号", "serial_number"]
     # td_array.each {|td| td.delete_at(1)}

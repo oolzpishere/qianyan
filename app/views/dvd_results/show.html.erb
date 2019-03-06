@@ -8,8 +8,7 @@
       </div>
       <div class="card-body">
   	    <div class="card-text">
-  			<%#  reject_rows(Entry.new(result: @result).values).each do |k, v| %>
-  			<%  Entry.new(result: @dvd_result).values.each do |k, v| %>
+  			<%  Entry.new(result: @dvd_result).show_values.each do |k, v| %>
   				<p class="mb-1">
             <b><%= "#{k}:"%></b>
   					<%= compile_value(v) %>
