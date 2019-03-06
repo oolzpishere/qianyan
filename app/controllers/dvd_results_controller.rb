@@ -22,7 +22,7 @@ class DvdResultsController < ApplicationController
       if params[:period] == 2018
         subject_names = %w(MathDvd EnglishDvd ChineseDvd)
       else
-        subject_names = %w(Math2019Dvd English2019Dvd Chinese2019Dvd)
+        subject_names = %w(MathADvd EnglishADvd ChineseADvd)
       end
 
       subject_names.each do |name|
