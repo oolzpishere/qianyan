@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Chinese2019DvdTest < ActiveSupport::TestCase
+class MathADvdTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

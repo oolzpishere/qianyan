@@ -1,0 +1,2 @@
+class MathADvd < ApplicationRecord
+end

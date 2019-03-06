@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_121231) do
+ActiveRecord::Schema.define(version: 2019_03_06_123749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "chinese_2019_dvds", force: :cascade do |t|
+  create_table "chinese_a_dvds", force: :cascade do |t|
     t.string "openid"
     t.string "unionid"
     t.string "form"
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 2019_03_06_121231) do
     t.datetime "form_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_type"], name: "index_chinese_2019_dvds_on_data_type"
-    t.index ["form"], name: "index_chinese_2019_dvds_on_form"
-    t.index ["gen_code"], name: "index_chinese_2019_dvds_on_gen_code"
-    t.index ["openid"], name: "index_chinese_2019_dvds_on_openid"
-    t.index ["unionid"], name: "index_chinese_2019_dvds_on_unionid"
+    t.index ["data_type"], name: "index_chinese_a_dvds_on_data_type"
+    t.index ["form"], name: "index_chinese_a_dvds_on_form"
+    t.index ["gen_code"], name: "index_chinese_a_dvds_on_gen_code"
+    t.index ["openid"], name: "index_chinese_a_dvds_on_openid"
+    t.index ["unionid"], name: "index_chinese_a_dvds_on_unionid"
   end
 
   create_table "chinese_dvds", force: :cascade do |t|
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_121231) do
     t.index ["unionid"], name: "index_chinese_dvds_on_unionid"
   end
 
-  create_table "english_2019_dvds", force: :cascade do |t|
+  create_table "english_a_dvds", force: :cascade do |t|
     t.string "openid"
     t.string "unionid"
     t.string "form"
@@ -65,11 +65,11 @@ ActiveRecord::Schema.define(version: 2019_03_06_121231) do
     t.datetime "form_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_type"], name: "index_english_2019_dvds_on_data_type"
-    t.index ["form"], name: "index_english_2019_dvds_on_form"
-    t.index ["gen_code"], name: "index_english_2019_dvds_on_gen_code"
-    t.index ["openid"], name: "index_english_2019_dvds_on_openid"
-    t.index ["unionid"], name: "index_english_2019_dvds_on_unionid"
+    t.index ["data_type"], name: "index_english_a_dvds_on_data_type"
+    t.index ["form"], name: "index_english_a_dvds_on_form"
+    t.index ["gen_code"], name: "index_english_a_dvds_on_gen_code"
+    t.index ["openid"], name: "index_english_a_dvds_on_openid"
+    t.index ["unionid"], name: "index_english_a_dvds_on_unionid"
   end
 
   create_table "english_dvds", force: :cascade do |t|
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_121231) do
     t.index ["unionid"], name: "index_english_dvds_on_unionid"
   end
 
-  create_table "math_2019_dvds", force: :cascade do |t|
+  create_table "math_a_dvds", force: :cascade do |t|
     t.string "openid"
     t.string "unionid"
     t.string "form"
@@ -103,11 +103,11 @@ ActiveRecord::Schema.define(version: 2019_03_06_121231) do
     t.datetime "form_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_type"], name: "index_math_2019_dvds_on_data_type"
-    t.index ["form"], name: "index_math_2019_dvds_on_form"
-    t.index ["gen_code"], name: "index_math_2019_dvds_on_gen_code"
-    t.index ["openid"], name: "index_math_2019_dvds_on_openid"
-    t.index ["unionid"], name: "index_math_2019_dvds_on_unionid"
+    t.index ["data_type"], name: "index_math_a_dvds_on_data_type"
+    t.index ["form"], name: "index_math_a_dvds_on_form"
+    t.index ["gen_code"], name: "index_math_a_dvds_on_gen_code"
+    t.index ["openid"], name: "index_math_a_dvds_on_openid"
+    t.index ["unionid"], name: "index_math_a_dvds_on_unionid"
   end
 
   create_table "math_dvds", force: :cascade do |t|

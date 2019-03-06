@@ -1,6 +1,6 @@
-class CreateMath2019Dvds < ActiveRecord::Migration[5.2]
+class CreateEnglishADvds < ActiveRecord::Migration[5.2]
   def change
-    create_table :math_2019_dvds do |t|
+    create_table :english_a_dvds do |t|
       t.string :openid
       t.string :unionid
       t.string :form
@@ -14,10 +14,10 @@ class CreateMath2019Dvds < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :math_2019_dvds, :openid
-    add_index :math_2019_dvds, :data_type
-    add_index :math_2019_dvds, :unionid
-    add_index :math_2019_dvds, :form
-    add_index :math_2019_dvds, :gen_code
+    add_index :english_a_dvds, :openid
+    add_index :english_a_dvds, :data_type
+    add_index :english_a_dvds, :unionid
+    add_index :english_a_dvds, :form
+    add_index :english_a_dvds, :gen_code
   end
 end

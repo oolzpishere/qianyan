@@ -1,0 +1,2 @@
+class EnglishADvd < ApplicationRecord
+end
