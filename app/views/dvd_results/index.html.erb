@@ -42,7 +42,8 @@
 
     	<% end %>
     <% end %>
-    <%= link_to '返回', :back, class: "mb-3 waves-effect waves-light btn blue darken-1 white-text" %>
-  	<%# link_to '返回',  root_path, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+    <% back_url =  (@period == 2018 ? "/order_dvd_2018" : "/order_dvd") %>
+    <%= link_to '返回', back_url, class: "mb-3 waves-effect waves-light btn blue darken-1 white-text" %>
+
   </div>
 </div>
