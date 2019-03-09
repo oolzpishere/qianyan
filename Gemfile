@@ -44,6 +44,7 @@ group :development, :test do
   # guard detect chang need gem install rb-fsevent
   gem 'guard-rspec', require: false
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do
