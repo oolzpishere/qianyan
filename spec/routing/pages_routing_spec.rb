@@ -12,7 +12,4 @@ RSpec.describe "routes for Pages", :type => :routing do
     end
   end
 
-  context "routeable to the pages controller" do
-    
-  end
 end
