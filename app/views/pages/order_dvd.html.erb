@@ -1,44 +1,66 @@
 <div class="container">
-  <div class="row">
-    <div class="col-12 deep-orange darken-1 text-white py-3">
-      <span class="h5">
-        <i class="fas fa-compact-disc mr-2"></i>
+  <div class="row py-2">
+    <div class="col-12 text-center">
+      <%= image_tag("logo_horizontal.png", width: "200px") %>
+    </div>
+    <div class="col-12 pt-1 text-center">
+      <span class="h5 font-weight-bold">
+        <!-- <i class="fas fa-compact-disc mr-2"></i> -->
         <!-- <i class="fas fa-list-ul mr-2"></i> -->
         2019年春“前沿课堂”光盘征订
       </span>
     </div>
   </div>
 
-  <div class="row px-1">
+  <div class="row ">
     <!-- <div class="col-12 rounded my-3 p-3 shadow border-left border-info" style="border-left-width:5px !important;">
         点击相应学科线上报名
     </div> -->
 
-    <div class="col-12 rounded my-3 py-3 border">
-      <%= link_to "https://jinshuju.net/f/DcLlzc", class: "inline-block" do %>
-        <h5 class="">数学光盘征订</h5>
-        <p class="m-0">2019年春全国初中数学前沿课堂观摩研讨会</p>
-        <p class="m-0">2019年春全国小学数学前沿课堂观摩研训会</p>
-      <% end %>
+    <div class="col-12 rounded my-2 ">
+      <div class="card ">
+        <div class="card-header">
+          数学光盘征订
+        </div>
+        <div class="card-body">
+          <%= link_to "https://jinshuju.net/f/DcLlzc", class: "inline-block" do %>
+            <p class="m-0">2019年春全国初中数学前沿课堂观摩研讨会</p>
+            <p class="m-0">2019年春全国小学数学前沿课堂观摩研训会</p>
+          <% end %>
+        </div>
+      </div>
     </div>
 
-    <div class="col-12 rounded mb-3 py-3 border">
-      <%= link_to "https://jinshuju.net/f/QxGAth", class: "inline-block" do %>
-        <h5 class="">英语光盘征订</h5>
-        <p class="m-0">2019年春全国小学英语前沿课堂观摩研训会</p>
-        <p class="m-0">2019年春全国初中英语前沿课堂观摩研训会</p>
-      <% end %>
+    <div class="col-12 rounded my-2">
+      <div class="card ">
+        <div class="card-header">
+          英语光盘征订
+        </div>
+        <div class="card-body">
+          <%= link_to "https://jinshuju.net/f/QxGAth", class: "inline-block" do %>
+
+            <p class="m-0">2019年春全国小学英语前沿课堂观摩研训会</p>
+            <p class="m-0">2019年春全国初中英语前沿课堂观摩研训会</p>
+          <% end %>
+        </div>
+      </div>
     </div>
 
-    <div class="col-12 rounded mb-3 py-3 border">
-      <%= link_to "https://jinshuju.net/f/UHfh9T", class: "inline-block" do %>
-        <h5 class="">语文光盘征订</h5>
-        <p class="m-0">2019年春全国初中语文前沿课堂统编教材教学观摩研训会</p>
-        <p class="m-0">2019年春全国小学语文前沿课堂统编教材教学观摩研训会</p>
-      <% end %>
+    <div class="col-12 rounded my-2">
+      <div class="card ">
+        <div class="card-header">
+          语文光盘征订
+        </div>
+        <div class="card-body">
+          <%= link_to "https://jinshuju.net/f/UHfh9T", class: "inline-block" do %>
+            <p class="m-0">2019年春全国初中语文前沿课堂统编教材教学观摩研训会</p>
+            <p class="m-0">2019年春全国小学语文前沿课堂统编教材教学观摩研训会</p>
+          <% end %>
+        </div>
+      </div>
     </div>
 
-    <%= link_to "https://qianyan.sflx.com.cn/dvd_results?period=2019", class: "btn btn-primary btn-lg btn-block mb-3" do %>
+    <%= link_to "https://qianyan.sflx.com.cn/dvd_results?period=2019", class: "btn btn-primary btn-lg btn-block my-3 mx-3" do %>
       2019年春季已征订查询
     <% end %>
 
