@@ -1,7 +1,7 @@
 class DvdResultsController < ApplicationController
-  if Rails.env.match(/production/)
-    before_action :invoke_wx_auth , if: Proc.new { |c| c.request.format != 'application/json' && !c.request.local? }
-    before_action :get_wechat_sns , if: Proc.new { |c| c.request.format != 'application/json' && !c.request.local? }
+  if Rails.env.match(/(production|test)/)
+    before_action :invoke_wx_auth , if: Proc.new { |c| c.request.format != 'application/json' }
+    before_action :get_wechat_sns , if: Proc.new { |c| c.request.format != 'application/json' }
   end
 
   # before_action :set_dvd_result, only: [:show, :edit, :update, :destroy]

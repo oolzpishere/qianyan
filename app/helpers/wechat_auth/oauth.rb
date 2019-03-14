@@ -2,7 +2,7 @@
 module WechatAuth
   class Oauth
     # require 'uri'
-    attr_reader :appid, :secret, :redirect_uri, :scope, :state
+    attr_reader :appid, :secret, :redirect_uri, :scope, :state, :code
     # code说明 ： code作为换取access_token的票据，每次用户授权带上的code将不一样，code只能使用一次，5分钟未被使用自动过期。
     def initialize( ps = {} )
       # params hash
@@ -13,6 +13,7 @@ module WechatAuth
       # default snsapi_base
       @scope = ps[:scope] || "snsapi_base"
       @state = "wechat_auth"
+      @code = ps[:code]
     end
 
     def get_code_uri
@@ -20,7 +21,7 @@ module WechatAuth
       "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{appid}&redirect_uri=#{redirect_uri}&response_type=code&scope=#{scope}&state=#{state}#wechat_redirect"
     end
 
-    def get_openid_uri(code)
+    def get_openid_uri
       "https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{appid}&secret=#{secret}&code=#{code}&grant_type=authorization_code"
     end
 

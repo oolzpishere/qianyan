@@ -42,7 +42,7 @@
 
     	<% end %>
     <% end %>
-    <% back_url =  (@period.match(/2018/) ? "/order_dvd_2018" : "/order_dvd") %>
+    <% back_url =  ( (@period && @period.match(/2018/)) ? "/order_dvd_2018" : "/order_dvd" ) %>
     <%= link_to '返回', back_url, class: "mb-3 waves-effect waves-light btn blue darken-1 white-text" %>
 
   </div>

@@ -5,8 +5,7 @@ module WechatAuth
 
     def initialize( ps = {} )
       @code = ps[:code]
-      oauth = WechatAuth::Oauth.new
-      @uri = oauth.get_openid_uri(code)
+      @uri = WechatAuth::Oauth.new(code: code).get_openid_uri
     end
 
     # { "access_token":"ACCESS_TOKEN",
