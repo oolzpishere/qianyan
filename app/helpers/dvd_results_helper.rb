@@ -7,23 +7,23 @@ module DvdResultsHelper
     if value.is_a?(Hash)
       value.reject { |k,v| v.empty? }
     # for products
-    elsif value.is_a?(Array)
+    elsif value.is_a?(Array) && value_is_product?(value)
       # value.reject { |item| item.empty? }
-      if value_is_product?(value)
-        result = []
-        value.each do |hash|
-          product = []
-          product << "#{hash['name']}" if hash['name']
-          spec = hash['spec']
-          product << "(#{spec.values.first})" if spec
-          product << " x "
-          product << "#{hash['number']}"if hash['number']
-          product = product.join
 
-          result << product
-        end
-        result.join(', ')
+      result = []
+      value.each do |hash|
+        product = []
+        product << "#{hash['name']}" if hash['name']
+        spec = hash['spec']
+        product << "(#{spec.values.first})" if spec
+        product << " x "
+        product << "#{hash['number']}"if hash['number']
+        product = product.join
+
+        result << product
       end
+      result.join(', ')
+
     else
       value
     end
