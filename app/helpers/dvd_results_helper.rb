@@ -14,7 +14,7 @@ module DvdResultsHelper
         product = []
         product << "#{hash['name']}" if hash['name']
         spec = hash['spec']
-        product << "(#{spec.keys.first}:#{spec.values.first})" if spec
+        product << "(#{spec.values.first})" if spec
         product << " x "
         product << "#{hash['number']}"if hash['number']
         product_text = product.join
