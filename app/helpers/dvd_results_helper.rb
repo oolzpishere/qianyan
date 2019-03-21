@@ -10,7 +10,17 @@ module DvdResultsHelper
     elsif value.is_a?(Array)
       # value.reject { |item| item.empty? }
       result = []
-      value.each {|hash| result << "#{hash['name']} x #{hash['number']} " if hash['name'] && hash['number'] }
+      value.each do |hash|
+        product = []
+        product << "#{hash['name']}" if hash['name']
+        spec = hash['spec']
+        product << "(#{spec.keys.first}:#{spec.values.first})" if spec
+        product << " x "
+        product << "#{hash['number']}"if hash['number']
+        product_text = product.join
+
+        result << product_text
+      end
       result.join(', ')
     else
       value
