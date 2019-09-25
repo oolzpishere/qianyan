@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_123749) do
+ActiveRecord::Schema.define(version: 2019_09_25_104926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "all_nineteen_autumn_dvds", force: :cascade do |t|
+    t.string "openid"
+    t.string "unionid"
+    t.string "form"
+    t.string "form_name"
+    t.json "entry"
+    t.string "gen_code"
+    t.string "data_type"
+    t.datetime "form_created_at"
+    t.datetime "form_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_type"], name: "index_all_nineteen_autumn_dvds_on_data_type"
+    t.index ["form"], name: "index_all_nineteen_autumn_dvds_on_form"
+    t.index ["gen_code"], name: "index_all_nineteen_autumn_dvds_on_gen_code"
+    t.index ["openid"], name: "index_all_nineteen_autumn_dvds_on_openid"
+    t.index ["unionid"], name: "index_all_nineteen_autumn_dvds_on_unionid"
+  end
 
   create_table "chinese_a_dvds", force: :cascade do |t|
     t.string "openid"
