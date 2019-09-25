@@ -1,0 +1,2 @@
+class AllNineteenAutumnDvd < ApplicationRecord
+end

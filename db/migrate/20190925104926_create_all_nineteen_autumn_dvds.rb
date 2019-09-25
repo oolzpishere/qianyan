@@ -1,6 +1,6 @@
-class CreateAll2019AutumnDvds < ActiveRecord::Migration[5.2]
+class CreateAllNineteenAutumnDvds < ActiveRecord::Migration[5.2]
   def change
-    create_table :all_2019_autumn_dvds do |t|
+    create_table :all_nineteen_autumn_dvds do |t|
       t.string :openid, index: true
       t.string :unionid, index: true
       t.string :form, index: true
