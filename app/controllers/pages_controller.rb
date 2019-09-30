@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   # before_action :set_page, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :invoke_wx_auth
+  skip_before_action :get_wechat_sns
 
   # GET /pages
   # GET /pages.json
