@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_104926) do
+ActiveRecord::Schema.define(version: 2020_09_26_150326) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "actived_codes", force: :cascade do |t|
+    t.integer "subject_id"
+    t.string "code"
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_actived_codes_on_code"
+    t.index ["subject_id"], name: "index_actived_codes_on_subject_id"
+  end
 
   create_table "all_nineteen_autumn_dvds", force: :cascade do |t|
     t.string "openid"
@@ -146,6 +153,12 @@ ActiveRecord::Schema.define(version: 2019_09_25_104926) do
     t.index ["gen_code"], name: "index_math_dvds_on_gen_code"
     t.index ["openid"], name: "index_math_dvds_on_openid"
     t.index ["unionid"], name: "index_math_dvds_on_unionid"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

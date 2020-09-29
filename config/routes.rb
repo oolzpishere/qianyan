@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   resources :dvd_results,  only: [:index, :show, :create]
   resources :redirects, only: [:index, :show]
 
+  # subject: :math, :chinese, :english
+  get 'streams/:subject/new', to: 'streams#new'
+  get 'streams/:subject', to: 'streams#show'
+  resources :streams, only: [:create]
+
+
   # for last match. get 'registration', to: 'pages#show'
   get '/:path', to: 'pages#show'
 end

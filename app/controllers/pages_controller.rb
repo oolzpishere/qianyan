@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    pages_arr = %w(registration order_dvd order_dvd_2018 paper live_2020 )
+    pages_arr = %w(registration order_dvd order_dvd_2018 paper live_2020 live_math )
     view_file = ERB::Util.html_escape_once params[:path]
     if pages_arr.include?(view_file)
       render view_file and return if lookup_context.exists?(view_file, 'pages')
