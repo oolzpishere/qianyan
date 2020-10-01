@@ -1,6 +1,8 @@
 class StreamsController < ApplicationController
   # before_action :set_stream, only: [:show, :edit, :update, :destroy]
   before_action :check_login, only: [:show]
+  before_action :subject, only: [:show]
+
 
 
   # GET /streams
@@ -12,7 +14,7 @@ class StreamsController < ApplicationController
   # GET /streams/1
   # GET /streams/1.json
   def show
-    @subject = params[:subject]
+    @subject = subject
   end
 
   def math
@@ -32,22 +34,19 @@ class StreamsController < ApplicationController
   # POST /streams.json
   def create
     code_param = stream_params[:code]
-    token_param = stream_params[:token]
-    subject = params[:subject]
+    subject_param = stream_params[:subject]
 
-    actived_code = get_code_rec(code_param)
-    if actived_code
-      update_token(actived_code)
-      # login
-      login_user(actived_code)
-    else
-      # code not find in db, return false.
-      return false
-    end
+    actived_code = get_code_rec(code_param, subject_param)
+    new_token = gen_token
+    actived_code.token = new_token
 
     respond_to do |format|
-      if actived_code.save
-        format.html { redirect_to({ subject: subject, action: 'show' }, notice: 'Stream was successfully created.') }
+      # if find actived_code in db and save success, login_user and return success action.
+      if actived_code && actived_code.save
+        # login
+        login_user(code_param, new_token)
+
+        format.html { redirect_to({ subject: subject_param, action: 'show' }, notice: '验证成功') }
         format.json { render :show, status: :created, location: actived_code }
       else
         format.html { render :new }
@@ -58,36 +57,37 @@ class StreamsController < ApplicationController
 
   # PATCH/PUT /streams/1
   # PATCH/PUT /streams/1.json
-  def update
-    respond_to do |format|
-      if @stream.update(stream_params)
-        format.html { redirect_to @stream, notice: 'Stream was successfully updated.' }
-        format.json { render :show, status: :ok, location: @stream }
-      else
-        format.html { render :edit }
-        format.json { render json: @stream.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @stream.update(stream_params)
+  #       format.html { redirect_to @stream, notice: 'Stream was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @stream }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @stream.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /streams/1
   # DELETE /streams/1.json
-  def destroy
-    @stream.destroy
-    respond_to do |format|
-      format.html { redirect_to streams_url, notice: 'Stream was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @stream.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to streams_url, notice: 'Stream was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
+    # Subject have to be a word character ([a-zA-Z0-9_]) and at least have one character.
+    SUBJECT_REX = /\A\w+\Z/
     # Use callbacks to share common setup or constraints between actions.
     def check_login
       if login?
         return
       else
         # redirect to login page.
-        subject = params[:subject]
         redirect_to({ subject: subject, action: 'new' }, notice: '请输入验证码')
       end
     end
@@ -95,7 +95,8 @@ class StreamsController < ApplicationController
     # check whether token is the same in db.
     def login?
       if session_code && session_token
-        code_rec = get_code_rec(session_code)
+        # check code exist at db.
+        code_rec = get_code_rec(session_code, subject)
         return false unless code_rec
         # compare token
         code_rec.token == session_token
@@ -110,46 +111,39 @@ class StreamsController < ApplicationController
     end
 
     # search at db
-    def get_code_rec(code)
-      ActivedCode.where(code: code).first
+    def get_code_rec(code, subject)
+      # make sure subject don't have illegal character.
+      raise "subject only allow word character." unless subject.match(SUBJECT_REX)
+      ActivedCode.joins(:subject).where(code: code, subjects: { name: subject }).first
     end
 
-    def update_token(actived_code)
-      # compare session token to db token.
-      token_same = session_token && actived_code.token && (session_token == actived_code.token)
-      if token_same
-        # same device
-        return
-      else
-        # difference device
-        set_new_token_to_db_and_session(actived_code)
-      end
+    def gen_token
+      SecureRandom.base64(32)
     end
 
-    def set_new_token_to_db_and_session(actived_code)
-      token = gen_token
-      session_token=(token)
-      actived_code.token = token
-    end
-
-    def login_user(actived_code)
-       session_code=(actived_code.code)
+    def login_user(code, new_token)
+       set_session_code(code)
+       set_session_token(new_token)
     end
 
     def session_code
       @session_code ||= session[:actived_code]
     end
 
-    def session_code=(code)
-      session[:actived_code] ||= code
+    def set_session_code(code)
+      session[:actived_code] = code
     end
 
     def session_token
       @session_token ||= session[:mtoken]
     end
 
-    def session_token=(token)
+    def set_session_token(token)
       session[:mtoken] = token
+    end
+
+    def subject
+      params[:subject] || params['subject']
     end
 
 

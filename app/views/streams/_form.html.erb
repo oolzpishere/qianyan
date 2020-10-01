@@ -12,8 +12,7 @@
     </div>
   <% end %>
 
-  <%# form.hidden_field :subject, value:  %>
-  <%# form.hidden_field :token, value: %>
+  <%= form.hidden_field :subject, value: params['subject'] %>
 
   <div class="form-group">
     <%= form.label "直播验证码", class: "h6" %>
