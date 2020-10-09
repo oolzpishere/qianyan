@@ -1,18 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<div class="">
-  <%= t(".#{@subject}") %>
+<%# t(".#{@subject}") %>
+<div id="stream-window-wrap" class="" data-subject=<%= @subject %>>
+  <% if @session_code %>
+    <%# live container %>
+    <object id="stream-window" class="" type="text/html"
+        data= <%= @live_link %>
+        width="100%"
+        height="600">
+    </object>
+  <% end %>
 </div>
 
-
-<%# live container %>
-<object type="text/html"
-    data="https://www.bilibili.com/"
-    width="100%"
-    height="600">
-</object>
-
 <%# heart beat check login js %>
-
-<%# link_to 'Edit', edit_stream_path(@stream) %> |
-<%# link_to 'Back', streams_path %>

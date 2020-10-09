@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'streams/:subject/new', to: 'streams#new'
   get 'streams/:subject', to: 'streams#show'
   resources :streams, only: [:create]
+  post 'streams/login_status', to: 'streams#login_status'
 
 
   # for last match. get 'registration', to: 'pages#show'

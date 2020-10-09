@@ -1,9 +1,9 @@
 class StreamsController < ApplicationController
+  protect_from_forgery except: :login_status
+
   # before_action :set_stream, only: [:show, :edit, :update, :destroy]
   before_action :check_login, only: [:show]
-  before_action :subject, only: [:show]
-
-
+  before_action :subject, only: [:show, :login_status]
 
   # GET /streams
   # GET /streams.json
@@ -15,6 +15,8 @@ class StreamsController < ApplicationController
   # GET /streams/1.json
   def show
     @subject = subject
+    @live_link = get_live_link(subject)
+    @session_code
   end
 
   def math
@@ -51,6 +53,16 @@ class StreamsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: actived_code.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def login_status
+    respond_to do |format|
+      if login?
+        format.json { render json: {login_status: true}, status: :ok }
+      else
+        format.json { render json: {login_status: false}, status: :ok }
       end
     end
   end
@@ -144,6 +156,17 @@ class StreamsController < ApplicationController
 
     def subject
       params[:subject] || params['subject']
+    end
+
+    def get_live_link(subject)
+      case subject.to_s
+      when "math"
+        "http://www.bilibili.com"
+      when "chinese"
+        "http://www.bilibili.com"
+      when "english"
+        "http://www.bilibili.com"
+      end
     end
 
 

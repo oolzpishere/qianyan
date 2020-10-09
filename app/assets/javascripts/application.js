@@ -18,3 +18,5 @@
 //= require bootstrap-sprockets
 //= require lib/Font-Awesome/svg-with-js/js/fontawesome.min
 //= require lib/Font-Awesome/svg-with-js/js/fa-solid.min
+//= require streams
+//= require all
