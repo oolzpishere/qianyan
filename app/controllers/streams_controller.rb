@@ -38,21 +38,31 @@ class StreamsController < ApplicationController
     code_param = stream_params[:code]
     subject_param = stream_params[:subject]
 
+    # if verify_rucaptcha? is false, refresh page to login again.
+    unless verify_rucaptcha?
+      return redirect_to({ subject: subject_param, action: 'new' }, notice: '图形验证码输入不正确')
+    end
+
     actived_code = get_code_rec(code_param, subject_param)
+    # if can't find actived_code in db, then inputted actived_code not exist.
+    unless actived_code
+      return redirect_to({ subject: subject_param, action: 'new' }, notice: '直播验证码输入不正确')
+    end
+
     new_token = gen_token
     actived_code.token = new_token
 
     respond_to do |format|
       # if find actived_code in db and save success, login_user and return success action.
-      if actived_code && actived_code.save
+      if actived_code.save
         # login
         login_user(code_param, new_token)
 
         format.html { redirect_to({ subject: subject_param, action: 'show' }, notice: '验证成功') }
-        format.json { render :show, status: :created, location: actived_code }
+        # format.json { render :show, status: :created, location: actived_code }
       else
         format.html { render :new }
-        format.json { render json: actived_code.errors, status: :unprocessable_entity }
+        # format.json { render json: actived_code.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -83,3 +83,5 @@ gem 'bootstrap'
 # for parse xls
 gem "roo"
 gem "roo-xls"
+
+gem 'rucaptcha'
